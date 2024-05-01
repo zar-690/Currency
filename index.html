@@ -1,0 +1,76 @@
+<html>
+	<head>
+			<title>Currency Converter</title>
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	</head>
+
+
+
+	<body style="background-image: url(currency.jpg);
+			background-size:1200px 800px;
+			background-repeat:no-repeat;">
+		<h1 class="display-1"style="margin-left:10%; font-weight:bold;color:white;">Welcome to the Currency Converter</h1>
+		
+		
+		<div class="card" style="width: 800px;margin-left:25%;margin-top:30px;background-color:rgba(244, 244, 201, 0.652);">
+		
+       <div class="card-body">
+	   <form>
+  <div class="mb-3">
+		
+	
+			<label class="form-label"style="margin-left:37%; color:black;font-weight:bold">Enter the Have Currency</label>
+			<input class="form-control" type ="text" id="have">
+			<br><br>
+			
+			<label class="form-label"style="margin-left:37%;color:black;font-weight:bold;">Enter the Want Currency</label>
+			<input class="form-control" type ="text" id="want">
+			<br><br>
+			
+			<label class="form-label"style="margin-left:37%;font-weight:bold">Enter the Amount</label>
+			<input class="form-control" type= "text" id="amount" >
+			<br><br>
+			
+			<button value="submit" class="btn btn-light" id="submit"style="margin-left:40%;font-weight:bold";>Convert</button>
+			
+			<p style="margin-left:38%;margin-top:10px;">old currency:<span id="old_currency"></span></p>
+			<p style="margin-left:38%;margin-top:10px;">new currency:<span id="new_currency"></span></p>
+			<p style="margin-left:38%;margin-top:10px;">old amount:<span id="old_amount"></span></p>
+			<p style="margin-left:38%;margin-top:10px;">converted amount:<span id="converted_amount"></span></p>
+			
+		</form>
+	</div>
+</div>
+			<script>
+	
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '58c63c7c44mshc7997efd9945910p1deb12jsn1221b9be4faf',
+		'X-RapidAPI-Host': 'currency-converter-by-api-ninjas.p.rapidapi.com'
+	}
+};
+				
+				const currencyconverter = (have, want, amount) =>
+					
+					  fetch('https://currency-converter-by-api-ninjas.p.rapidapi.com/v1/convertcurrency?have='+have+'&want='+want+'&amount='+amount,options)
+							.then( (response => response.json() ))
+							.then( (data) => { console.log(data)
+									old_currency.innerHTML =data.old_currency
+									new_currency.innerHTML =data.new_currency
+									old_amount.innerHTML = data.old_amount
+									converted_amount.innerHTML = data.new_amount
+							})
+							
+					submit.addEventListener("click", (e) => {
+						e.preventDefault()
+						currencyconverter(have.value,want.value,amount.value);
+					})
+					
+					currencyconverter("INR","USD","10000")
+					
+			</script>
+		</form>
+	</body>
+
+</html>
